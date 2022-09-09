@@ -102,20 +102,15 @@ abstract class UICalendar @JvmOverloads constructor(
         todayItemTextColor = attrs.getColor(
             R.styleable.UICalendar_todayItem_textColor, mTodayItemTextColor
         )
-        var todayItemBackgroundDrawable =
-            attrs.getDrawable(R.styleable.UICalendar_todayItem_background)
-        todayItemBackgroundDrawable = todayItemBackgroundDrawable ?: mTodayItemBackgroundDrawable
+        mTodayItemBackgroundDrawable =
+            attrs.getDrawable(R.styleable.UICalendar_todayItem_background) ?: mTodayItemBackgroundDrawable
         selectedItemTextColor = attrs.getColor(
             R.styleable.UICalendar_selectedItem_textColor, mSelectedItemTextColor
         )
-        var selectedItemBackgroundDrawable =
-            attrs.getDrawable(R.styleable.UICalendar_selectedItem_background)
-        selectedItemBackgroundDrawable =
-            selectedItemBackgroundDrawable ?: mSelectedItemBackgroundDrawable
-        var buttonLeftDrawable = attrs.getDrawable(R.styleable.UICalendar_buttonLeft_drawable)
-        buttonLeftDrawable = buttonLeftDrawable ?: mButtonLeftDrawable
-        var buttonRightDrawable = attrs.getDrawable(R.styleable.UICalendar_buttonRight_drawable)
-        buttonRightDrawable = buttonRightDrawable ?: mButtonRightDrawable
+        mSelectedItemBackgroundDrawable =
+            attrs.getDrawable(R.styleable.UICalendar_selectedItem_background) ?: mSelectedItemBackgroundDrawable
+        mButtonLeftDrawable = attrs.getDrawable(R.styleable.UICalendar_buttonLeft_drawable) ?: mButtonLeftDrawable
+        mButtonRightDrawable = attrs.getDrawable(R.styleable.UICalendar_buttonRight_drawable) ?: mButtonRightDrawable
         setButtonLeftDrawableTintColor(
             attrs.getColor(
                 R.styleable.UICalendar_buttonLeft_drawableTintColor,
