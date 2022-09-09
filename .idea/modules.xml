@@ -2,10 +2,15 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/Collapsible-Calendar-View-Android.iml" filepath="$PROJECT_DIR$/.idea/Collapsible-Calendar-View-Android.iml" />
-      <module fileurl="file://$PROJECT_DIR$/CollapsibleCalendarView.iml" filepath="$PROJECT_DIR$/CollapsibleCalendarView.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/collapsiblecalendarview2/collapsiblecalendarview2.iml" filepath="$PROJECT_DIR$/collapsiblecalendarview2/collapsiblecalendarview2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Material-Collapsible-Calendar-Android1.iml" filepath="$PROJECT_DIR$/.idea/modules/Material-Collapsible-Calendar-Android1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/Material-Collapsible-Calendar-Android1.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/Material-Collapsible-Calendar-Android1.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/Material-Collapsible-Calendar-Android1.app.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/Material-Collapsible-Calendar-Android1.app.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/Material-Collapsible-Calendar-Android1.app.main.iml" filepath="$PROJECT_DIR$/.idea/modules/app/Material-Collapsible-Calendar-Android1.app.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/Material-Collapsible-Calendar-Android1.app.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/Material-Collapsible-Calendar-Android1.app.unitTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/collapsiblecalendarview2/Material-Collapsible-Calendar-Android1.collapsiblecalendarview2.iml" filepath="$PROJECT_DIR$/.idea/modules/collapsiblecalendarview2/Material-Collapsible-Calendar-Android1.collapsiblecalendarview2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/collapsiblecalendarview2/Material-Collapsible-Calendar-Android1.collapsiblecalendarview2.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/collapsiblecalendarview2/Material-Collapsible-Calendar-Android1.collapsiblecalendarview2.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/collapsiblecalendarview2/Material-Collapsible-Calendar-Android1.collapsiblecalendarview2.main.iml" filepath="$PROJECT_DIR$/.idea/modules/collapsiblecalendarview2/Material-Collapsible-Calendar-Android1.collapsiblecalendarview2.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/collapsiblecalendarview2/Material-Collapsible-Calendar-Android1.collapsiblecalendarview2.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/collapsiblecalendarview2/Material-Collapsible-Calendar-Android1.collapsiblecalendarview2.unitTest.iml" />
     </modules>
   </component>
 </project>
