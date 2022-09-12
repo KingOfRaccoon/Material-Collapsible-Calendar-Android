@@ -15,6 +15,7 @@
         app:eventColor="@android:color/black"
         app:eventDotSize="small"
         app:expandIconColor="#346AFC"
+        app:todayColorIconEvent="@android:color/white"
         app:selectedItem_background="@drawable/circle_white_solid_background"
         app:selectedItem_textColor="@color/google_red"
         app:todayItem_background="@drawable/background_item_date_header"

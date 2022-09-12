@@ -47,6 +47,8 @@ abstract class UICalendar @JvmOverloads constructor(
     private var mTextColor = Color.BLACK
     private var mPrimaryColor = Color.WHITE
     private var mTodayItemTextColor = Color.BLACK
+    private var mTodayItemIconColor = Color.WHITE
+    private var mItemIconColor = Color.parseColor("#333333")
     private var mTodayItemBackgroundDrawable =
         resources.getDrawable(R.drawable.circle_black_stroke_background)
     private var mSelectedItemTextColor = Color.WHITE
@@ -68,11 +70,6 @@ abstract class UICalendar @JvmOverloads constructor(
 
         // load rootView from xml
         val rootView = mInflater.inflate(R.layout.widget_collapsible_calendarview, this, true)
-
-//        rootView.background = MaterialShapeDrawable(
-//            ShapeAppearanceModel.builder().setBottomLeftCornerSize(26f)
-//                .setBottomRightCornerSize(26f).build()
-//        )
 
         // init UI
         mLayoutRoot = rootView.findViewById(R.id.layout_root)
@@ -102,6 +99,8 @@ abstract class UICalendar @JvmOverloads constructor(
         todayItemTextColor = attrs.getColor(
             R.styleable.UICalendar_todayItem_textColor, mTodayItemTextColor
         )
+        todayItemIconColor = attrs.getColor(R.styleable.UICalendar_todayColorIconEvent, mTodayItemIconColor)
+        itemIconColor = attrs.getColor(R.styleable.UICalendar_colorIconEvent, mItemIconColor)
         mTodayItemBackgroundDrawable =
             attrs.getDrawable(R.styleable.UICalendar_todayItem_background) ?: mTodayItemBackgroundDrawable
         selectedItemTextColor = attrs.getColor(
@@ -205,6 +204,20 @@ abstract class UICalendar @JvmOverloads constructor(
         get() = mTodayItemTextColor
         set(todayItemTextColor) {
             mTodayItemTextColor = todayItemTextColor
+            redraw()
+        }
+
+    var todayItemIconColor: Int
+        get() = mTodayItemIconColor
+        set(value){
+            mTodayItemIconColor = value
+            redraw()
+        }
+
+    var itemIconColor: Int
+        get() = mItemIconColor
+        set(value){
+            mItemIconColor = value
             redraw()
         }
     var todayItemBackgroundDrawable: Drawable

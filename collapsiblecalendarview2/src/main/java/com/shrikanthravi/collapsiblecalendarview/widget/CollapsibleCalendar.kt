@@ -1,13 +1,16 @@
 package com.shrikanthravi.collapsiblecalendarview.widget
 
 import android.content.Context
+import android.content.res.ColorStateList
 import android.graphics.Color
+import android.graphics.PorterDuff
 import android.os.Handler
 import android.util.AttributeSet
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.Transformation
+import android.widget.ImageView
 import android.widget.TableLayout
 import android.widget.TableRow
 import android.widget.TextView
@@ -115,20 +118,24 @@ class CollapsibleCalendar : UICalendar {
             for (i in 0 until mAdapter!!.count) {
                 val day = mAdapter!!.getItem(i)
                 val view = mAdapter!!.getView(i)
-                val txtDay = view.findViewById<View>(R.id.txt_day) as TextView
+                val txtDay = view.findViewById<TextView>(R.id.txt_day)
+                val iconDay = view.findViewById<ImageView>(R.id.img_event_tag)
                 txtDay.setBackgroundColor(Color.TRANSPARENT)
                 txtDay.setTextColor(textColor)
 
                 // set today's item
                 if (isToady(day)) {
-                    txtDay.setBackgroundDrawable(todayItemBackgroundDrawable)
+                    txtDay.background = todayItemBackgroundDrawable
                     txtDay.setTextColor(todayItemTextColor)
-                }
+                    iconDay.setColorFilter(todayItemIconColor)
+                } else
+                    iconDay.setColorFilter(itemIconColor)
 
                 // set the selected item
                 if (isSelectedDay(day)) {
-                    txtDay.setBackgroundDrawable(selectedItemBackgroundDrawable)
+                    txtDay.background = selectedItemBackgroundDrawable
                     txtDay.setTextColor(selectedItemTextColor)
+                    iconDay.setColorFilter(itemIconColor)
                 }
             }
         }

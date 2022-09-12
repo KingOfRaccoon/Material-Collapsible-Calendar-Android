@@ -40,6 +40,9 @@
             <enum name="big" value="0" />
         </attr>
 
+        <attr name="todayColorIconEvent" format="color" />
+        <attr name="colorIconEvent" format="color" />
+
         <attr name="todayItem_textColor" format="color" />
         <attr name="todayItem_background" format="integer" />
 
