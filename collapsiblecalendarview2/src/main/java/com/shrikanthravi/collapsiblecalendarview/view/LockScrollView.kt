@@ -25,4 +25,8 @@ class LockScrollView : ScrollView {
     override fun onTouchEvent(ev: MotionEvent): Boolean {
         return false
     }
+
+    init {
+        isNestedScrollingEnabled = false
+    }
 }
