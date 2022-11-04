@@ -148,7 +148,7 @@ abstract class UICalendar @JvmOverloads constructor(
     var colorContainerTableBody: Int
     get() = mColorContainerTableBody
     set(colorContainerTableBody) {
-        containerTableBody?.setBackgroundColor(colorContainerTableBody)
+        mColorContainerTableBody = colorContainerTableBody
         redraw()
     }
 

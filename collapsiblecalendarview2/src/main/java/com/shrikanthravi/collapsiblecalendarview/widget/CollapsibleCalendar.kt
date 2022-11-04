@@ -109,6 +109,7 @@ class CollapsibleCalendar : UICalendar {
 
     override fun redraw() {
         // redraw all views of week
+        containerTableBody?.setCardBackgroundColor(colorContainerTableBody)
         val rowWeek = mTableHead!!.getChildAt(0) as TableRow
         for (i in 0 until rowWeek.childCount) {
             (rowWeek.getChildAt(i) as TextView).setTextColor(textColor)
