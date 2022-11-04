@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         app:buttonLeft_drawableTintColor="#346AFC"
         app:buttonRight_drawableTintColor="#346AFC"
+        app:containerBackgroundColor="#FF0000"
         app:eventColor="@android:color/black"
         app:eventDotSize="small"
         app:expandIconColor="#346AFC"

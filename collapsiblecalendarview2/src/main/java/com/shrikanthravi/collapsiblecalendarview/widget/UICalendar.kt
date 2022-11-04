@@ -8,12 +8,9 @@ import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.*
+import com.google.android.material.card.MaterialCardView
 import com.shrikanthravi.collapsiblecalendarview.R
-import com.shrikanthravi.collapsiblecalendarview.widget.UICalendar
-import com.shrikanthravi.collapsiblecalendarview.data.CalendarAdapter
-import com.shrikanthravi.collapsiblecalendarview.widget.CollapsibleCalendar.CalendarListener
 import com.shrikanthravi.collapsiblecalendarview.view.ExpandIconView
-import com.shrikanthravi.collapsiblecalendarview.listener.OnSwipeTouchListener
 import com.shrikanthravi.collapsiblecalendarview.data.Day
 import kotlin.jvm.JvmOverloads
 import com.shrikanthravi.collapsiblecalendarview.view.LockScrollView
@@ -39,6 +36,7 @@ abstract class UICalendar @JvmOverloads constructor(
     protected var mBtnPrevWeek: ImageView? = null
     protected var mBtnNextWeek: ImageView? = null
     protected var expandIconView: ExpandIconView? = null
+    protected var containerTableBody: MaterialCardView? = null
 
     // Attributes
     private var mShowWeek = true
@@ -62,6 +60,7 @@ abstract class UICalendar @JvmOverloads constructor(
     private var mExpandIconColor = Color.BLACK
     private var mEventColor = Color.BLACK
     private var mEventDotSize = EVENT_DOT_BIG
+    private var mColorContainerTableBody = Color.WHITE
     protected abstract fun redraw()
     protected abstract fun reload()
     protected open fun init(context: Context) {
@@ -84,11 +83,11 @@ abstract class UICalendar @JvmOverloads constructor(
         mBtnPrevWeek = rootView.findViewById(R.id.btn_prev_week)
         mBtnNextWeek = rootView.findViewById(R.id.btn_next_week)
         expandIconView = rootView.findViewById(R.id.expandIcon)
+        containerTableBody = rootView.findViewById(R.id.container_table_body)
     }
 
     protected fun setAttributes(attrs: TypedArray) {
         // set attributes by the values from XML
-        //setStyle(attrs.getInt(R.styleable.UICalendar_style, mStyle));
         isShowWeek = attrs.getBoolean(R.styleable.UICalendar_showWeek, mShowWeek)
         firstDayOfWeek = attrs.getInt(R.styleable.UICalendar_firstDayOfWeek, mFirstDayOfWeek)
         state = attrs.getInt(R.styleable.UICalendar_state, mState)
@@ -122,6 +121,7 @@ abstract class UICalendar @JvmOverloads constructor(
                 mButtonRightDrawableTintColor
             )
         )
+        mColorContainerTableBody = attrs.getColor(R.styleable.UICalendar_containerBackgroundColor, Color.WHITE)
         setExpandIconColor(attrs.getColor(R.styleable.UICalendar_expandIconColor, mExpandIconColor))
         val selectedItem: Day? = null
     }
@@ -143,6 +143,13 @@ abstract class UICalendar @JvmOverloads constructor(
     fun setExpandIconColor(color: Int) {
         mExpandIconColor = color
         expandIconView!!.setColor(color)
+    }
+
+    var colorContainerTableBody: Int
+    get() = mColorContainerTableBody
+    set(colorContainerTableBody) {
+        containerTableBody?.setBackgroundColor(colorContainerTableBody)
+        redraw()
     }
 
     var isShowWeek: Boolean

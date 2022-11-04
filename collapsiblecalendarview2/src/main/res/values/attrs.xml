@@ -14,6 +14,8 @@
 
     <declare-styleable name="UICalendar">
 
+        <attr name="containerBackgroundColor" format="color"/>
+
         <attr name="showWeek" format="boolean" />
 
         <attr name="firstDayOfWeek" format="enum">

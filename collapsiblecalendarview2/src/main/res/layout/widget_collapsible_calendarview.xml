@@ -80,8 +80,8 @@
     </RelativeLayout>
 
     <com.google.android.material.card.MaterialCardView
+        android:id="@+id/container_table_body"
         android:layout_width="match_parent"
-        app:cardBackgroundColor="#F4FAFF"
         app:cardCornerRadius="8dp"
         android:layout_marginHorizontal="18dp"
         android:layout_marginVertical="9dp"
@@ -98,9 +98,7 @@
             <TableLayout
                 android:id="@+id/table_head"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-            </TableLayout>
+                android:layout_height="wrap_content"/>
 
             <com.shrikanthravi.collapsiblecalendarview.view.LockScrollView
                 android:id="@+id/scroll_view_body"
@@ -111,9 +109,7 @@
                 <TableLayout
                     android:id="@+id/table_body"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                </TableLayout>
+                    android:layout_height="wrap_content"/>
 
             </com.shrikanthravi.collapsiblecalendarview.view.LockScrollView>
 
