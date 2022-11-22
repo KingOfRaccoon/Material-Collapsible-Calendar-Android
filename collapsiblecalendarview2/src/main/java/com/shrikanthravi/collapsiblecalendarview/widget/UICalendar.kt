@@ -8,6 +8,7 @@ import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.*
+import androidx.constraintlayout.widget.ConstraintLayout
 import com.google.android.material.card.MaterialCardView
 import com.shrikanthravi.collapsiblecalendarview.R
 import com.shrikanthravi.collapsiblecalendarview.view.ExpandIconView
@@ -24,7 +25,7 @@ abstract class UICalendar @JvmOverloads constructor(
     protected lateinit var mInflater: LayoutInflater
 
     // UI
-    protected var mLayoutRoot: LinearLayout? = null
+    protected var mLayoutRoot: ConstraintLayout? = null
     protected var mTxtTitle: TextView? = null
     protected var mTableHead: TableLayout? = null
     protected var mScrollViewBody: LockScrollView? = null

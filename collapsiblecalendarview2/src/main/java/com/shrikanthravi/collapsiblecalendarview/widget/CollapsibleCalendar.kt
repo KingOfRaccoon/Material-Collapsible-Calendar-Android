@@ -1,9 +1,7 @@
 package com.shrikanthravi.collapsiblecalendarview.widget
 
 import android.content.Context
-import android.content.res.ColorStateList
 import android.graphics.Color
-import android.graphics.PorterDuff
 import android.os.Handler
 import android.util.AttributeSet
 import android.view.View
@@ -16,10 +14,12 @@ import android.widget.TableRow
 import android.widget.TextView
 import com.shrikanthravi.collapsiblecalendarview.R
 import com.shrikanthravi.collapsiblecalendarview.data.CalendarAdapter
-import com.shrikanthravi.collapsiblecalendarview.view.ExpandIconView
-import com.shrikanthravi.collapsiblecalendarview.listener.OnSwipeTouchListener
 import com.shrikanthravi.collapsiblecalendarview.data.Day
 import com.shrikanthravi.collapsiblecalendarview.data.Event
+import com.shrikanthravi.collapsiblecalendarview.listener.OnSwipeTouchListener
+import com.shrikanthravi.collapsiblecalendarview.view.ExpandIconView
+import com.transitionseverywhere.ChangeText
+import com.transitionseverywhere.TransitionManager
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -148,10 +148,18 @@ class CollapsibleCalendar : UICalendar {
             mAdapter!!.refresh()
 
             // reset UI
-            val dateFormat = SimpleDateFormat("LLLL")
+            val dateFormat = SimpleDateFormat("LLLL yyyy")
             dateFormat.timeZone = mAdapter!!.calendar.timeZone
-            mTxtTitle!!.text = dateFormat.format(mAdapter!!.calendar.time)
+            val newText = dateFormat.format(mAdapter!!.calendar.time)
+                .replace(Calendar.getInstance().get(Calendar.YEAR).toString(), "").trim()
                 .replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }
+            if (mLayoutRoot != null && newText != mTxtTitle?.text) {
+                TransitionManager.beginDelayedTransition(
+                    mLayoutRoot!!,
+                    ChangeText().setChangeBehavior(ChangeText.CHANGE_BEHAVIOR_OUT).setChangeBehavior(ChangeText.CHANGE_BEHAVIOR_IN)
+                )
+                mTxtTitle!!.text = newText
+            }
             mTableHead!!.removeAllViews()
             mTableBody!!.removeAllViews()
             var rowCurrent: TableRow
