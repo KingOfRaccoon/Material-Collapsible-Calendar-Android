@@ -11,9 +11,8 @@ import android.widget.*
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.google.android.material.card.MaterialCardView
 import com.shrikanthravi.collapsiblecalendarview.R
-import com.shrikanthravi.collapsiblecalendarview.view.ExpandIconView
 import com.shrikanthravi.collapsiblecalendarview.data.Day
-import kotlin.jvm.JvmOverloads
+import com.shrikanthravi.collapsiblecalendarview.view.ExpandIconView
 import com.shrikanthravi.collapsiblecalendarview.view.LockScrollView
 
 abstract class UICalendar @JvmOverloads constructor(
@@ -62,6 +61,13 @@ abstract class UICalendar @JvmOverloads constructor(
     private var mEventColor = Color.BLACK
     private var mEventDotSize = EVENT_DOT_BIG
     private var mColorContainerTableBody = Color.WHITE
+    var mTypeSelection = 1
+    var mTypeSelectionToday = 1
+    private var mStrokeGradientColorsSelect = IntArray(8) { NOT_DEFINED_COLOR }
+    private var mStrokeGradientColorsToday = IntArray(8) { NOT_DEFINED_COLOR }
+    var strokeGradientColorsSelect = intArrayOf()
+    var strokeGradientColorsToday = intArrayOf()
+
     protected abstract fun redraw()
     protected abstract fun reload()
     protected open fun init(context: Context) {
@@ -99,17 +105,22 @@ abstract class UICalendar @JvmOverloads constructor(
         todayItemTextColor = attrs.getColor(
             R.styleable.UICalendar_todayItem_textColor, mTodayItemTextColor
         )
-        todayItemIconColor = attrs.getColor(R.styleable.UICalendar_todayColorIconEvent, mTodayItemIconColor)
+        todayItemIconColor =
+            attrs.getColor(R.styleable.UICalendar_todayColorIconEvent, mTodayItemIconColor)
         itemIconColor = attrs.getColor(R.styleable.UICalendar_colorIconEvent, mItemIconColor)
         mTodayItemBackgroundDrawable =
-            attrs.getDrawable(R.styleable.UICalendar_todayItem_background) ?: mTodayItemBackgroundDrawable
+            attrs.getDrawable(R.styleable.UICalendar_todayItem_background)
+                ?: mTodayItemBackgroundDrawable
         selectedItemTextColor = attrs.getColor(
             R.styleable.UICalendar_selectedItem_textColor, mSelectedItemTextColor
         )
         mSelectedItemBackgroundDrawable =
-            attrs.getDrawable(R.styleable.UICalendar_selectedItem_background) ?: mSelectedItemBackgroundDrawable
-        mButtonLeftDrawable = attrs.getDrawable(R.styleable.UICalendar_buttonLeft_drawable) ?: mButtonLeftDrawable
-        mButtonRightDrawable = attrs.getDrawable(R.styleable.UICalendar_buttonRight_drawable) ?: mButtonRightDrawable
+            attrs.getDrawable(R.styleable.UICalendar_selectedItem_background)
+                ?: mSelectedItemBackgroundDrawable
+        mButtonLeftDrawable =
+            attrs.getDrawable(R.styleable.UICalendar_buttonLeft_drawable) ?: mButtonLeftDrawable
+        mButtonRightDrawable =
+            attrs.getDrawable(R.styleable.UICalendar_buttonRight_drawable) ?: mButtonRightDrawable
         setButtonLeftDrawableTintColor(
             attrs.getColor(
                 R.styleable.UICalendar_buttonLeft_drawableTintColor,
@@ -122,36 +133,120 @@ abstract class UICalendar @JvmOverloads constructor(
                 mButtonRightDrawableTintColor
             )
         )
-        mColorContainerTableBody = attrs.getColor(R.styleable.UICalendar_containerBackgroundColor, Color.WHITE)
+        mColorContainerTableBody =
+            attrs.getColor(R.styleable.UICalendar_containerBackgroundColor, Color.WHITE)
         setExpandIconColor(attrs.getColor(R.styleable.UICalendar_expandIconColor, mExpandIconColor))
-        val selectedItem: Day? = null
+        mTypeSelection = attrs.getInt(R.styleable.UICalendar_typeSelection, 1)
+        mTypeSelectionToday = attrs.getInt(R.styleable.UICalendar_typeToday, 1)
+
+        mStrokeGradientColorsSelect[0] = attrs.getColor(
+            R.styleable.UICalendar_strokeGradientColorSelect0,
+            NOT_DEFINED_COLOR
+        )
+        mStrokeGradientColorsSelect[1] = attrs.getColor(
+            R.styleable.UICalendar_strokeGradientColorSelect1,
+            NOT_DEFINED_COLOR
+        )
+        mStrokeGradientColorsSelect[2] = attrs.getColor(
+            R.styleable.UICalendar_strokeGradientColorSelect2,
+            NOT_DEFINED_COLOR
+        )
+        mStrokeGradientColorsSelect[3] = attrs.getColor(
+            R.styleable.UICalendar_strokeGradientColorSelect3,
+            NOT_DEFINED_COLOR
+        )
+        mStrokeGradientColorsSelect[4] = attrs.getColor(
+            R.styleable.UICalendar_strokeGradientColorSelect4,
+            NOT_DEFINED_COLOR
+        )
+        mStrokeGradientColorsSelect[5] = attrs.getColor(
+            R.styleable.UICalendar_strokeGradientColorSelect5,
+            NOT_DEFINED_COLOR
+        )
+        mStrokeGradientColorsSelect[6] = attrs.getColor(
+            R.styleable.UICalendar_strokeGradientColorSelect6,
+            NOT_DEFINED_COLOR
+        )
+        mStrokeGradientColorsSelect[7] = attrs.getColor(
+            R.styleable.UICalendar_strokeGradientColorSelectEnd,
+            NOT_DEFINED_COLOR
+        )
+        strokeGradientColorsSelect = getColorArray(mStrokeGradientColorsSelect)
+
+        mStrokeGradientColorsToday[0] = attrs.getColor(
+            R.styleable.UICalendar_strokeGradientColorToday0,
+            NOT_DEFINED_COLOR
+        )
+        mStrokeGradientColorsToday[1] = attrs.getColor(
+            R.styleable.UICalendar_strokeGradientColorToday1,
+            NOT_DEFINED_COLOR
+        )
+        mStrokeGradientColorsToday[2] = attrs.getColor(
+            R.styleable.UICalendar_strokeGradientColorToday2,
+            NOT_DEFINED_COLOR
+        )
+        mStrokeGradientColorsToday[3] = attrs.getColor(
+            R.styleable.UICalendar_strokeGradientColorToday3,
+            NOT_DEFINED_COLOR
+        )
+        mStrokeGradientColorsToday[4] = attrs.getColor(
+            R.styleable.UICalendar_strokeGradientColorToday4,
+            NOT_DEFINED_COLOR
+        )
+        mStrokeGradientColorsToday[5] = attrs.getColor(
+            R.styleable.UICalendar_strokeGradientColorToday5,
+            NOT_DEFINED_COLOR
+        )
+        mStrokeGradientColorsToday[6] = attrs.getColor(
+            R.styleable.UICalendar_strokeGradientColorToday6,
+            NOT_DEFINED_COLOR
+        )
+        mStrokeGradientColorsToday[7] = attrs.getColor(
+            R.styleable.UICalendar_strokeGradientColorTodayEnd,
+            NOT_DEFINED_COLOR
+        )
+        strokeGradientColorsToday = getColorArray(mStrokeGradientColorsToday)
     }
 
-    fun setButtonLeftDrawableTintColor(color: Int) {
+    private fun setButtonLeftDrawableTintColor(color: Int) {
         mButtonLeftDrawableTintColor = color
-        mBtnPrevMonth!!.drawable.setColorFilter(color, PorterDuff.Mode.SRC_ATOP)
-        mBtnPrevWeek!!.drawable.setColorFilter(color, PorterDuff.Mode.SRC_ATOP)
+        mBtnPrevMonth?.drawable?.setColorFilter(color, PorterDuff.Mode.SRC_ATOP)
+        mBtnPrevWeek?.drawable?.setColorFilter(color, PorterDuff.Mode.SRC_ATOP)
         redraw()
     }
 
-    fun setButtonRightDrawableTintColor(color: Int) {
+    private fun setButtonRightDrawableTintColor(color: Int) {
         mButtonRightDrawableTintColor = color
-        mBtnNextMonth!!.drawable.setColorFilter(color, PorterDuff.Mode.SRC_ATOP)
-        mBtnNextWeek!!.drawable.setColorFilter(color, PorterDuff.Mode.SRC_ATOP)
+        mBtnNextMonth?.drawable?.setColorFilter(color, PorterDuff.Mode.SRC_ATOP)
+        mBtnNextWeek?.drawable?.setColorFilter(color, PorterDuff.Mode.SRC_ATOP)
         redraw()
     }
 
-    fun setExpandIconColor(color: Int) {
+    private fun setExpandIconColor(color: Int) {
         mExpandIconColor = color
-        expandIconView!!.setColor(color)
+        expandIconView?.setColor(color)
+    }
+
+    private fun getColorArray(colors: IntArray): IntArray {
+        val colorArray = ArrayList<Int>()
+        for (c in colors)
+            if (c != NOT_DEFINED_COLOR)
+                colorArray.add(c)
+        if (colors.last() == NOT_DEFINED_COLOR && colorArray.size != 0)
+            colorArray.add(colorArray.first())
+        else if (colorArray.size == 0) {
+            colorArray.add(DEFAULT_COLOR_STROKE)
+            colorArray.add(DEFAULT_COLOR_STROKE)
+        }
+        return colorArray.toIntArray()
     }
 
     var colorContainerTableBody: Int
-    get() = mColorContainerTableBody
-    set(colorContainerTableBody) {
-        mColorContainerTableBody = colorContainerTableBody
-        redraw()
-    }
+        get() = mColorContainerTableBody
+        set(colorContainerTableBody) {
+            mColorContainerTableBody = colorContainerTableBody
+            redraw()
+        }
 
     var isShowWeek: Boolean
         get() = mShowWeek
@@ -174,12 +269,12 @@ abstract class UICalendar @JvmOverloads constructor(
         set(state) {
             mState = state
             if (mState == STATE_EXPANDED) {
-                mLayoutBtnGroupMonth!!.visibility = VISIBLE
-                mLayoutBtnGroupWeek!!.visibility = GONE
+                mLayoutBtnGroupMonth?.visibility = VISIBLE
+                mLayoutBtnGroupWeek?.visibility = GONE
             }
             if (mState == STATE_COLLAPSED) {
-                mLayoutBtnGroupMonth!!.visibility = GONE
-                mLayoutBtnGroupWeek!!.visibility = VISIBLE
+                mLayoutBtnGroupMonth?.visibility = GONE
+                mLayoutBtnGroupWeek?.visibility = VISIBLE
             }
         }
     var textColor: Int
@@ -187,14 +282,14 @@ abstract class UICalendar @JvmOverloads constructor(
         set(textColor) {
             mTextColor = textColor
             redraw()
-            mTxtTitle!!.setTextColor(mTextColor)
+            mTxtTitle?.setTextColor(mTextColor)
         }
     var primaryColor: Int
         get() = mPrimaryColor
         set(primaryColor) {
             mPrimaryColor = primaryColor
             redraw()
-            mLayoutRoot!!.setBackgroundColor(mPrimaryColor)
+            mLayoutRoot?.setBackgroundColor(mPrimaryColor)
         }
     var eventDotSize: Int
         get() = mEventDotSize
@@ -217,14 +312,14 @@ abstract class UICalendar @JvmOverloads constructor(
 
     var todayItemIconColor: Int
         get() = mTodayItemIconColor
-        set(value){
+        set(value) {
             mTodayItemIconColor = value
             redraw()
         }
 
     var itemIconColor: Int
         get() = mItemIconColor
-        set(value){
+        set(value) {
             mItemIconColor = value
             redraw()
         }
@@ -277,6 +372,9 @@ abstract class UICalendar @JvmOverloads constructor(
         const val STATE_PROCESSING = 2
         const val EVENT_DOT_BIG = 0
         const val EVENT_DOT_SMALL = 1
+
+        const val NOT_DEFINED_COLOR = -10
+        val DEFAULT_COLOR_STROKE = Color.rgb(128, 128, 128)
     }
 
     init {

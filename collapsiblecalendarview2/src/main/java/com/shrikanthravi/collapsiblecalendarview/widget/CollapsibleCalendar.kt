@@ -18,6 +18,7 @@ import com.shrikanthravi.collapsiblecalendarview.data.Day
 import com.shrikanthravi.collapsiblecalendarview.data.Event
 import com.shrikanthravi.collapsiblecalendarview.listener.OnSwipeTouchListener
 import com.shrikanthravi.collapsiblecalendarview.view.ExpandIconView
+import com.sinaseyfi.advancedcardview.AdvancedCardView
 import com.transitionseverywhere.ChangeText
 import com.transitionseverywhere.TransitionManager
 import java.text.SimpleDateFormat
@@ -41,8 +42,7 @@ class CollapsibleCalendar : UICalendar {
         context,
         attrs,
         defStyleAttr
-    ) {
-    }
+    )
 
     override fun init(context: Context) {
         super.init(context)
@@ -119,6 +119,7 @@ class CollapsibleCalendar : UICalendar {
             for (i in 0 until mAdapter!!.count) {
                 val day = mAdapter!!.getItem(i)
                 val view = mAdapter!!.getView(i)
+                val containerTxtDay = view.findViewById<AdvancedCardView>(R.id.container_txt_day)
                 val txtDay = view.findViewById<TextView>(R.id.txt_day)
                 val iconDay = view.findViewById<ImageView>(R.id.img_event_tag)
                 txtDay.setBackgroundColor(Color.TRANSPARENT)
@@ -126,17 +127,41 @@ class CollapsibleCalendar : UICalendar {
 
                 // set today's item
                 if (isToady(day)) {
-                    txtDay.background = todayItemBackgroundDrawable
-                    txtDay.setTextColor(todayItemTextColor)
-                    iconDay.setColorFilter(todayItemIconColor)
-                } else
+                    if (mTypeSelectionToday == 1) {
+                        containerTxtDay.background_Type = AdvancedCardView.BackgroundType.Fill
+                        containerTxtDay.background = todayItemBackgroundDrawable
+                        txtDay.setTextColor(todayItemTextColor)
+                        iconDay.setColorFilter(todayItemIconColor)
+                    } else if (mTypeSelectionToday == 0) {
+                        containerTxtDay.background_Type = AdvancedCardView.BackgroundType.Stroke
+                        containerTxtDay.stroke_Gradient_Colors = strokeGradientColorsToday
+                        containerTxtDay.stroke_Width = dp(view.context, 2)
+                    }
+                } else {
+                    containerTxtDay.stroke_Width = dp(view.context, 0)
                     iconDay.setColorFilter(itemIconColor)
+                }
 
                 // set the selected item
                 if (isSelectedDay(day)) {
-                    txtDay.background = selectedItemBackgroundDrawable
-                    txtDay.setTextColor(selectedItemTextColor)
+                    println("mTypeSelection: $mTypeSelection")
+                    if (mTypeSelection == 1) {
+                        containerTxtDay.background_Type = AdvancedCardView.BackgroundType.Fill
+                        containerTxtDay.background = selectedItemBackgroundDrawable
+                        txtDay.setTextColor(selectedItemTextColor)
+
+                    } else if (mTypeSelection == 0){
+                        containerTxtDay.background = null
+                        println("strokeGradientColorsSelect: ${strokeGradientColorsSelect.size}")
+                        containerTxtDay.background_Type = AdvancedCardView.BackgroundType.Stroke
+                        containerTxtDay.stroke_Gradient_Colors = strokeGradientColorsSelect
+                        containerTxtDay.stroke_Width = dp(view.context, 2)
+                        containerTxtDay.invalidate()
+                    }
+                } else {
                     iconDay.setColorFilter(itemIconColor)
+                    containerTxtDay.stroke_Width = dp(view.context, 0)
+                    containerTxtDay.invalidate()
                 }
             }
         }
@@ -519,4 +544,7 @@ class CollapsibleCalendar : UICalendar {
         // triggered when the week position are changed.
         fun onWeekChange(position: Int)
     }
+
+    fun dp(context: Context, pixel: Int) =
+        context.resources.displayMetrics.density * pixel
 }

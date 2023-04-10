@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/linearLayout"
@@ -8,26 +7,37 @@
     android:layout_height="match_parent"
     android:gravity="center">
 
-    <TextView
-        android:id="@+id/txt_day"
+    <com.sinaseyfi.advancedcardview.AdvancedCardView
+        android:id="@+id/container_txt_day"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:background_Color="#00000000"
+        app:cornerRadius="8dp"
+        app:corner_Type="third"
+        app:stroke_Type="solid"
+        app:stroke_ColorType="gradient_linear"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
-        android:background="@android:color/transparent"
-        android:gravity="center"
-        android:paddingStart="11dp"
-        android:paddingTop="5dp"
-        android:paddingBottom="5dp"
+        android:layout_marginBottom="8dp"
         android:paddingEnd="11dp"
-        android:textColor="@android:color/black"
-        android:textSize="15sp"
+        android:paddingBottom="5dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="Date" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/txt_day"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/transparent"
+            android:gravity="center"
+            android:paddingHorizontal="11dp"
+            android:paddingVertical="5dp"
+            android:textColor="@android:color/black"
+            android:textSize="15sp"
+            tools:text="Date" />
+    </com.sinaseyfi.advancedcardview.AdvancedCardView>
 
     <ImageView
         android:id="@+id/img_event_tag"
@@ -36,9 +46,7 @@
         android:layout_margin="2dp"
         android:src="@drawable/dot_icon"
         android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="@+id/txt_day"
-        app:layout_constraintTop_toTopOf="@+id/txt_day"
+        app:layout_constraintEnd_toEndOf="@id/container_txt_day"
+        app:layout_constraintTop_toTopOf="@id/container_txt_day"
         tools:visibility="visible" />
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

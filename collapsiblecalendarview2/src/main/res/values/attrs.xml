@@ -15,6 +15,36 @@
     <declare-styleable name="UICalendar">
 
         <attr name="containerBackgroundColor" format="color"/>
+        
+        <attr name="typeSelection" format="enum">
+            <enum name="stroke" value="0" />
+            <enum name="solid" value="1" />
+        </attr>
+
+        <attr name="strokeGradientColorSelect0" format="color"/>
+        <attr name="strokeGradientColorSelect1" format="color"/>
+        <attr name="strokeGradientColorSelect2" format="color"/>
+        <attr name="strokeGradientColorSelect3" format="color"/>
+        <attr name="strokeGradientColorSelect4" format="color"/>
+        <attr name="strokeGradientColorSelect5" format="color"/>
+        <attr name="strokeGradientColorSelect6" format="color"/>
+        <attr name="strokeGradientColorSelectEnd" format="color"/>
+        <attr name="strokeGradientAngleSelect" format="float"/>
+
+        <attr name="typeToday" format="enum">
+            <enum name="stroke" value="0" />
+            <enum name="solid" value="1" />
+        </attr>
+
+        <attr name="strokeGradientColorToday0" format="color"/>
+        <attr name="strokeGradientColorToday1" format="color"/>
+        <attr name="strokeGradientColorToday2" format="color"/>
+        <attr name="strokeGradientColorToday3" format="color"/>
+        <attr name="strokeGradientColorToday4" format="color"/>
+        <attr name="strokeGradientColorToday5" format="color"/>
+        <attr name="strokeGradientColorToday6" format="color"/>
+        <attr name="strokeGradientColorTodayEnd" format="color"/>
+        <attr name="strokeGradientAngleToday" format="float"/>
 
         <attr name="showWeek" format="boolean" />
 
