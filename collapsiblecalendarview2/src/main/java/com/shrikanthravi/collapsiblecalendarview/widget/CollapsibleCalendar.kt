@@ -145,12 +145,11 @@ class CollapsibleCalendar : UICalendar {
                 // set the selected item
                 if (isSelectedDay(day)) {
                     println("mTypeSelection: $mTypeSelection")
+                    txtDay.setTextColor(selectedItemTextColor)
                     if (mTypeSelection == 1) {
                         containerTxtDay.background_Type = AdvancedCardView.BackgroundType.Fill
                         containerTxtDay.background = selectedItemBackgroundDrawable
-                        txtDay.setTextColor(selectedItemTextColor)
-
-                    } else if (mTypeSelection == 0){
+                    } else if (mTypeSelection == 0) {
                         containerTxtDay.background = null
                         println("strokeGradientColorsSelect: ${strokeGradientColorsSelect.size}")
                         containerTxtDay.background_Type = AdvancedCardView.BackgroundType.Stroke
@@ -181,7 +180,8 @@ class CollapsibleCalendar : UICalendar {
             if (mLayoutRoot != null && newText != mTxtTitle?.text) {
                 TransitionManager.beginDelayedTransition(
                     mLayoutRoot!!,
-                    ChangeText().setChangeBehavior(ChangeText.CHANGE_BEHAVIOR_OUT).setChangeBehavior(ChangeText.CHANGE_BEHAVIOR_IN)
+                    ChangeText().setChangeBehavior(ChangeText.CHANGE_BEHAVIOR_OUT)
+                        .setChangeBehavior(ChangeText.CHANGE_BEHAVIOR_IN)
                 )
                 mTxtTitle!!.text = newText
             }
