@@ -15,6 +15,7 @@
         app:cornerRadius="8dp"
         app:corner_Type="third"
         app:stroke_Type="solid"
+        app:shadow_Outer_Area="2dp"
         app:stroke_ColorType="gradient_linear"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"

@@ -14,6 +14,7 @@
         app:background_Color="#00000000"
         app:cornerRadius="8dp"
         app:corner_Type="third"
+        app:shadow_Outer_Area="2dp"
         android:paddingStart="8dp"
         android:paddingTop="11dp"
         android:paddingEnd="11dp"
