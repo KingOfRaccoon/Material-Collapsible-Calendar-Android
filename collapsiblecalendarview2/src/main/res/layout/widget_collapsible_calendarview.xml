@@ -108,6 +108,7 @@
                 android:scrollbars="none">
 
                 <TableLayout
+                    android:dividerPadding="5dp"
                     android:id="@+id/table_body"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />

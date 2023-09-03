@@ -12,6 +12,7 @@ import android.widget.ImageView
 import android.widget.TableLayout
 import android.widget.TableRow
 import android.widget.TextView
+import androidx.core.view.updatePadding
 import com.shrikanthravi.collapsiblecalendarview.R
 import com.shrikanthravi.collapsiblecalendarview.data.CalendarAdapter
 import com.shrikanthravi.collapsiblecalendarview.data.Day
@@ -135,31 +136,31 @@ class CollapsibleCalendar : UICalendar {
                     } else if (mTypeSelectionToday == 0) {
                         containerTxtDay.background_Type = AdvancedCardView.BackgroundType.Stroke
                         containerTxtDay.stroke_Gradient_Colors = strokeGradientColorsToday
-                        containerTxtDay.stroke_Width = dp(view.context, 2)
+//                        containerTxtDay.stroke_Width = dp(view.context, 2)
                     }
                 } else {
-                    containerTxtDay.stroke_Width = dp(view.context, 0)
+//                    containerTxtDay.stroke_Width = dp(view.context, 0)
                     iconDay.setColorFilter(itemIconColor)
                 }
 
                 // set the selected item
                 if (isSelectedDay(day)) {
-                    println("mTypeSelection: $mTypeSelection")
                     txtDay.setTextColor(selectedItemTextColor)
                     if (mTypeSelection == 1) {
                         containerTxtDay.background_Type = AdvancedCardView.BackgroundType.Fill
                         containerTxtDay.background = selectedItemBackgroundDrawable
                     } else if (mTypeSelection == 0) {
                         containerTxtDay.background = null
-                        println("strokeGradientColorsSelect: ${strokeGradientColorsSelect.size}")
                         containerTxtDay.background_Type = AdvancedCardView.BackgroundType.Stroke
                         containerTxtDay.stroke_Gradient_Colors = strokeGradientColorsSelect
-                        containerTxtDay.stroke_Width = dp(view.context, 2)
+//                        containerTxtDay.stroke_Width = dp(view.context, 2)
                         containerTxtDay.invalidate()
                     }
-                } else {
+                } else if (!isToady(day)) {
+                    containerTxtDay.background_Type = AdvancedCardView.BackgroundType.Fill
                     iconDay.setColorFilter(itemIconColor)
-                    containerTxtDay.stroke_Width = dp(view.context, 0)
+                    containerTxtDay.stroke_Alpha = 0f
+//                    containerTxtDay.stroke_Width = 0f
                     containerTxtDay.invalidate()
                 }
             }
@@ -221,6 +222,8 @@ class CollapsibleCalendar : UICalendar {
             for (i in 0 until mAdapter!!.count) {
                 if (i % 7 == 0) {
                     rowCurrent = TableRow(mContext)
+//                    println("update padding: $i")
+//                    rowCurrent.updatePadding(0,0, 0, dp(context, 5).toInt())
                     rowCurrent.layoutParams = TableLayout.LayoutParams(
                         ViewGroup.LayoutParams.MATCH_PARENT,
                         ViewGroup.LayoutParams.WRAP_CONTENT

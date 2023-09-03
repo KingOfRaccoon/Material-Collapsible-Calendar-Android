@@ -6,9 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.view.updatePadding
+import androidx.core.view.updatePaddingRelative
 import com.shrikanthravi.collapsiblecalendarview.R
 import com.shrikanthravi.collapsiblecalendarview.widget.UICalendar
-import java.util.*
+import java.util.Calendar
 import kotlin.math.ceil
 
 /**
@@ -96,6 +98,7 @@ class CalendarAdapter(context: Context, val calendar: Calendar) {
                 mInflater.inflate(R.layout.day_layout_small, null)
             else
                 mInflater.inflate(R.layout.day_layout, null)
+
             val txtDay = view.findViewById<View>(R.id.txt_day) as TextView
             val imgEventTag = view.findViewById<View>(R.id.img_event_tag) as ImageView
             txtDay.text = day.day.toString()
@@ -113,6 +116,9 @@ class CalendarAdapter(context: Context, val calendar: Calendar) {
             mViewList.add(view)
         }
     }
+
+    fun dp(context: Context, pixel: Int) =
+        context.resources.displayMetrics.density * pixel
 
     init {
         calendar[Calendar.DAY_OF_MONTH] = 1
